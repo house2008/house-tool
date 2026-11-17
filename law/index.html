@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="中国特色社会主义法治体系 · 国家法律索引，收录宪法、现行有效法律及附录文件名称。">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<title>国家法律索引 · 中国特色社会主义法治体系</title>
+<style>
+  :root{
+    --red-950:#5c090d;
+    --red-900:#711015;
+    --red-800:#8c161c;
+    --red-700:#a41c24;
+    --red-600:#b62a31;
+    --gold-600:#a9841d;
+    --gold-500:#c9a227;
+    --gold-400:#d9b64a;
+    --gold-200:#efdfae;
+    --ink:#24262b;
+    --ink-soft:#4c4a45;
+    --muted:#827a6d;
+    --paper:#f5f1e8;
+    --card:#fffdf8;
+    --line:#e8dfcd;
+    --line-strong:#d9c9a8;
+    --shadow:0 14px 40px rgba(91,60,20,.09);
+    --serif:"Noto Serif SC","Source Han Serif SC","Songti SC",STSong,SimSun,serif;
+    --sans:"Microsoft YaHei","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    font-size:15px;
+    line-height:1.65;
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 560px at 88% -8%, rgba(164,28,36,.07), transparent 62%),
+      radial-gradient(900px 520px at -12% 34%, rgba(201,162,39,.10), transparent 58%),
+      var(--paper);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background-image:
+      linear-gradient(rgba(120,90,40,.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,90,40,.028) 1px, transparent 1px);
+    background-size:46px 46px;
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.7), transparent 85%);
+  }
+  button,input{font:inherit}
+  button{color:inherit}
+  a{color:inherit}
+  mark{background:#ecd28a;color:inherit;padding:0 1px;border-radius:2px}
+  .law-title mark{background:#ffff00}
+  .law-snippet mark{background:#ecd28a}
+  [hidden]{display:none !important}
+  .wrap{width:min(1240px, calc(100% - 48px));margin:0 auto;position:relative;z-index:1}
+
+  /* ============ Hero ============ */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    color:#fff;
+    background:linear-gradient(118deg,#600a0f 0%,#841218 38%,#a71d25 68%,#730d12 100%);
+    border-bottom:1px solid rgba(201,162,39,.55);
+    isolation:isolate;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    background:
+      radial-gradient(circle at 18% 16%, rgba(255,255,255,.10), transparent 34%),
+      radial-gradient(circle at 82% 8%, rgba(239,223,174,.10), transparent 30%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,.022) 0 1px, transparent 1px 16px);
+  }
+  .hero::after{
+    content:"法";
+    position:absolute;
+    right:3.5%;
+    bottom:-23%;
+    z-index:-1;
+    font-family:var(--serif);
+    font-size:clamp(260px, 34vw, 470px);
+    font-weight:700;
+    line-height:1;
+    color:rgba(255,255,255,.035);
+    pointer-events:none;
+    user-select:none;
+  }
+  .hero-rule{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(239,223,174,.55),transparent)}
+  .hero-rule.top{top:0}
+  .hero-rule.bottom{bottom:0}
+  .hero-inner{padding:42px 0 38px}
+  .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:18px;min-width:0}
+  .seal{
+    flex:0 0 auto;
+    width:64px;height:64px;
+    display:grid;place-items:center;
+    font-family:var(--serif);
+    font-size:36px;font-weight:700;
+    color:var(--gold-200);
+    border:2px solid var(--gold-400);
+    border-radius:11px;
+    background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(0,0,0,.16));
+    box-shadow:inset 0 0 0 4px rgba(201,162,39,.14), 0 10px 26px rgba(0,0,0,.24);
+    letter-spacing:0;
+  }
+  .seal.small{width:40px;height:40px;font-size:22px;border-width:1px;border-radius:8px;box-shadow:inset 0 0 0 2px rgba(201,162,39,.12)}
+  .kicker{margin:0 0 3px;font-size:11px;letter-spacing:.22em;color:var(--gold-200);font-weight:600}
+  .brand h1{
+    margin:0;
+    font-family:var(--serif);
+    font-size:clamp(31px, 4vw, 46px);
+    line-height:1.16;
+    letter-spacing:.10em;
+    font-weight:700;
+    text-shadow:0 2px 14px rgba(0,0,0,.18);
+  }
+  .en-title{margin:5px 0 0;font-size:10px;letter-spacing:.34em;color:rgba(255,255,255,.58);font-weight:600}
+  .hero-tag{
+    align-self:center;
+    padding:7px 14px;
+    border:1px solid rgba(239,223,174,.42);
+    border-radius:999px;
+    font-size:12px;
+    letter-spacing:.08em;
+    color:var(--gold-200);
+    background:rgba(255,255,255,.05);
+    white-space:nowrap;
+  }
+  .hero-quote{
+    margin:30px 0 0;
+    padding-left:16px;
+    border-left:2px solid var(--gold-400);
+    font-family:var(--serif);
+    font-size:clamp(17px, 2vw, 21px);
+    letter-spacing:.04em;
+    color:#fbf0cf;
+    line-height:1.5;
+  }
+  .hero-sub{
+    max-width:880px;
+    margin:12px 0 0;
+    font-size:13.5px;
+    color:rgba(255,255,255,.76);
+    letter-spacing:.02em;
+  }
+  .pillars{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:22px;
+    font-size:12.5px;
+    letter-spacing:.16em;
+    color:rgba(255,255,255,.88);
+  }
+  .pillars span{display:inline-flex;align-items:center;gap:14px}
+  .pillars span:not(:last-child)::after{
+    content:"";
+    width:5px;height:5px;
+    transform:rotate(45deg);
+    background:var(--gold-400);
+    opacity:.85;
+  }
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0,1fr));
+    gap:12px;
+    margin-top:30px;
+  }
+  .stat{
+    padding:14px 16px 13px;
+    border:1px solid rgba(239,223,174,.24);
+    border-radius:12px;
+    background:linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.035));
+    backdrop-filter:blur(4px);
+  }
+  .stat strong{
+    display:block;
+    font-family:var(--serif);
+    font-size:29px;
+    line-height:1.15;
+    color:var(--gold-200);
+    font-weight:700;
+    letter-spacing:.02em;
+  }
+  .stat span{display:block;margin-top:2px;font-size:11.5px;color:rgba(255,255,255,.66);letter-spacing:.08em}
+
+  /* ============ Layout ============ */
+  .layout{
+    display:grid;
+    grid-template-columns:264px minmax(0,1fr);
+    gap:30px;
+    padding:34px 0 64px;
+    align-items:start;
+  }
+  .sidebar{position:sticky;top:20px;min-width:0}
+  .side-card{
+    background:rgba(255,253,248,.88);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px 14px 16px;
+    box-shadow:var(--shadow);
+    max-height:calc(100vh - 40px);
+    overflow:auto;
+    scrollbar-width:thin;
+    scrollbar-color:#d8c9ab transparent;
+  }
+  .side-title{
+    margin:0 8px 12px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--line);
+    font-size:11px;
+    letter-spacing:.2em;
+    color:var(--gold-600);
+    font-weight:700;
+  }
+  .nav a{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:8px;
+    padding:8px 10px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    transition:background .18s, color .18s, box-shadow .18s;
+  }
+  .nav a > span:first-child{flex:1 1 auto;min-width:0;line-height:1.45;overflow-wrap:break-word}
+  .nav a:hover{background:#f6efdf;color:var(--red-800)}
+  .nav a.active{
+    background:#f8eae7;
+    color:var(--red-800);
+    font-weight:700;
+    box-shadow:inset 3px 0 0 var(--gold-500);
+  }
+  .nav a .nav-count{
+    flex:0 0 auto;
+    min-width:22px;
+    padding:0 6px;
+    border-radius:999px;
+    background:#f1e8d6;
+    color:#8a785c;
+    font-size:10.5px;
+    line-height:18px;
+    text-align:center;
+    font-weight:400;
+  }
+  .nav a.active .nav-count{background:#efd9d5;color:var(--red-700)}
+  .nav-sub{padding-left:20px !important;font-size:12.5px !important;color:var(--muted) !important}
+  .nav-sub::before{
+    content:"";
+    width:4px;height:4px;
+    margin-top:8px;
+    margin-right:8px;
+    border-radius:50%;
+    background:#cdbd9e;
+    flex:0 0 auto;
+  }
+  .nav-sub span:first-of-type{margin-right:auto}
+  .side-note{
+    margin:16px 8px 0;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .side-note b{display:block;font-size:11px;letter-spacing:.14em;color:var(--gold-600);margin-bottom:5px}
+  .side-note p{margin:0;font-size:12px;line-height:1.7;color:var(--muted)}
+
+  /* ============ Search ============ */
+  .main{min-width:0}
+  .search-card{
+    position:sticky;
+    top:12px;
+    z-index:30;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:rgba(255,253,248,.93);
+    backdrop-filter:blur(14px);
+    box-shadow:0 12px 34px rgba(91,60,20,.10);
+  }
+  .search-row{display:flex;align-items:center;gap:10px}
+  .search-icon{flex:0 0 auto;width:20px;height:20px;color:#9b8a6d}
+  #searchInput{
+    flex:1;
+    min-width:0;
+    height:40px;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:var(--ink);
+    font-size:15px;
+    letter-spacing:.01em;
+  }
+  #searchInput::placeholder{color:#a99e8b}
+  #searchInput::-webkit-search-cancel-button{display:none}
+  .key-hint{
+    flex:0 0 auto;
+    min-width:24px;
+    padding:1px 6px;
+    border:1px solid #e2d5ba;
+    border-bottom-width:2px;
+    border-radius:5px;
+    background:#f7f0e1;
+    color:#937c52;
+    font-size:11px;
+    line-height:18px;
+    text-align:center;
+  }
+  .clear-btn{
+    flex:0 0 auto;
+    border:0;
+    border-radius:7px;
+    padding:7px 11px;
+    background:#f3e7d2;
+    color:#8a5c17;
+    font-size:12px;
+    cursor:pointer;
+    transition:background .18s;
+  }
+  .clear-btn:hover{background:#ecd9b8}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 12px;
+    border:1px solid #e4dac6;
+    border-radius:999px;
+    background:#fffbf1;
+    color:#605646;
+    font-size:12.5px;
+    cursor:pointer;
+    transition:all .18s;
+  }
+  .chip:hover{border-color:var(--line-strong);background:#faf2df}
+  .chip.active{
+    border-color:var(--red-800);
+    background:var(--red-800);
+    color:#fff;
+    box-shadow:0 4px 12px rgba(140,22,28,.22);
+  }
+  .chip .n{font-size:10.5px;opacity:.66}
+  .search-controls{
+    display:flex;flex-wrap:wrap;gap:9px 18px;
+    margin-top:10px;padding-top:10px;
+    border-top:1px dashed #e4d9c4;
+  }
+  .control-group{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap}
+  .control-label{font-size:10.5px;color:#9a8c74;letter-spacing:.08em;margin-right:2px}
+  .seg{
+    border:1px solid #e4dac6;border-radius:6px;
+    background:#fffbf1;color:#6b5f4c;
+    padding:3px 8px;font-size:11.5px;line-height:1.5;
+    cursor:pointer;transition:background .16s,border-color .16s,color .16s;
+  }
+  .seg:hover{background:#f6efdf;border-color:#d9c9a8}
+  .seg.active{background:var(--red-800);border-color:var(--red-800);color:#fff;box-shadow:0 2px 8px rgba(140,22,28,.18)}
+  .search-panel[hidden]{display:none !important}
+  .panel-toggle{
+    flex:0 0 auto;
+    display:inline-flex;align-items:center;gap:5px;
+    border:1px solid #e4d8c0;border-radius:7px;
+    background:#fffaf0;color:#6f5b3d;
+    padding:6px 10px;font-size:12px;line-height:1.4;
+    cursor:pointer;transition:background .18s,border-color .18s,color .18s;
+  }
+  .panel-toggle:hover{background:#f6efdf;border-color:#d9c9a8;color:var(--red-800)}
+  .panel-chevron{display:inline-block;font-size:11px;line-height:1;transition:transform .18s}
+  .panel-toggle[aria-expanded="false"] .panel-chevron{transform:rotate(180deg)}
+  .sort-bar{
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    margin:14px 0 0;padding:9px 14px;
+    border:1px solid var(--line);border-radius:10px;
+    background:rgba(255,253,248,.76);
+  }
+  .sort-bar-label{font-size:11px;letter-spacing:.12em;color:#9a8c74;font-weight:600;margin-right:2px}
+  .sort-bar .seg{background:#fffaf0;border-color:#e4dac6}
+  .sort-bar .seg.active{background:var(--red-800);border-color:var(--red-800);color:#fff}
+  .sort-bar-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-left:auto}
+  .sort-bar-note{font-size:11.5px;color:#8f8678}
+  .sort-bar-count{font-size:12px;color:var(--red-800);font-weight:600;white-space:nowrap}
+  .library-link{
+    display:inline-flex;align-items:center;gap:4px;
+    padding:4px 11px;border:1px solid var(--red-800);border-radius:999px;
+    background:var(--red-800);color:#fff;text-decoration:none;
+    font-size:11.5px;white-space:nowrap;box-shadow:0 4px 12px rgba(140,22,28,.16);
+    transition:background .18s;
+  }
+  .library-link:hover{background:var(--red-700)}
+  .search-foot{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px dashed #e4d9c4;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .db-status{display:inline-flex;align-items:center;gap:7px;color:#8a6a2a}
+  .foot-right{display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .search-state{font-size:11.5px;color:#8a6a2a}
+  .update-status{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:#8f8678}
+  .link-btn{border:0;background:transparent;padding:0;color:var(--red-800);font-size:11.5px;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+  .link-btn:hover{color:var(--red-600)}
+  .pulse{
+    width:7px;height:7px;
+    border-radius:50%;
+    background:#c58a1f;
+    box-shadow:0 0 0 0 rgba(197,138,31,.45);
+    animation:pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(197,138,31,.42)}
+    70%{box-shadow:0 0 0 7px rgba(197,138,31,0)}
+    100%{box-shadow:0 0 0 0 rgba(197,138,31,0)}
+  }
+  .notice{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin:16px 0 24px;
+    padding:11px 15px;
+    border:1px solid #ead9a7;
+    border-left:4px solid var(--gold-500);
+    border-radius:10px;
+    background:linear-gradient(90deg,#fdf6e3,#fffaf0);
+    color:#6e5724;
+    font-size:12.5px;
+    line-height:1.7;
+  }
+  .notice svg{flex:0 0 auto;margin-top:2px;width:17px;height:17px}
+
+  /* ============ Sections ============ */
+  .law-section{margin-bottom:42px;scroll-margin-top:225px}
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:18px;
+    padding-bottom:11px;
+    border-bottom:2px solid var(--red-800);
+    position:relative;
+  }
+  .section-head::after{
+    content:"";
+    position:absolute;
+    left:0;bottom:-2px;
+    width:64px;height:2px;
+    background:var(--gold-500);
+  }
+  .section-kicker{margin:0 0 2px;font-size:9.5px;letter-spacing:.22em;color:var(--gold-600);font-weight:700}
+  .section-head h2{margin:0;font-family:var(--serif);font-size:26px;line-height:1.25;letter-spacing:.07em;color:var(--red-900)}
+  .section-note{margin:3px 0 0;font-size:12px;color:var(--muted);letter-spacing:.01em}
+  .section-count{
+    flex:0 0 auto;
+    padding:4px 11px;
+    border:1px solid #ecd4cf;
+    border-radius:999px;
+    background:#f8eae7;
+    color:var(--red-800);
+    font-size:12px;
+    white-space:nowrap;
+  }
+  .group{margin-bottom:22px;scroll-margin-top:235px}
+  .group-head{display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:0 2px}
+  .group-head::before{content:"";width:7px;height:7px;background:var(--gold-500);transform:rotate(45deg);flex:0 0 auto}
+  .group-head h3{margin:0;font-size:14.5px;line-height:1.4;font-weight:700;color:#4d4336;letter-spacing:.05em;white-space:nowrap}
+  .group-head .line{flex:1;height:1px;background:linear-gradient(90deg,#e3d7c0,transparent)}
+  .group-head .g-count{flex:0 0 auto;padding:0 8px;border-radius:999px;background:#f1e9d9;color:#8d7b5d;font-size:10.5px;line-height:18px}
+  .law-items{display:flex;flex-direction:column;gap:5px}
+
+  .law-row{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:9px 13px;
+    border:1px solid #ece3d2;
+    border-radius:10px;
+    background:rgba(255,253,248,.72);
+    text-align:left;
+    text-decoration:none;
+    color:inherit;
+    cursor:pointer;
+    transition:transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+  }
+  .law-row:hover{
+    transform:translateX(3px);
+    border-color:#dcc79a;
+    background:#fffdf7;
+    box-shadow:0 7px 18px rgba(110,75,25,.09);
+  }
+  .law-row:focus-visible{outline:2px solid var(--gold-500);outline-offset:2px}
+  .law-no{
+    flex:0 0 auto;
+    width:42px;height:27px;
+    display:grid;place-items:center;
+    border:1px solid #eadfc6;
+    border-radius:7px;
+    background:#f7f0e0;
+    color:#9a7b3f;
+    font-family:var(--sans);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.03em;
+    line-height:1;
+  }
+  .law-body{flex:1;min-width:0}
+  .law-title{display:block;font-size:14.5px;line-height:1.45;color:#2b2b2b;font-weight:500;letter-spacing:.01em}
+  .law-meta{display:block;margin-top:1px;font-size:11px;color:#918674;letter-spacing:.02em}
+  .law-snippet{
+    display:block;
+    margin-top:5px;
+    padding:4px 9px;
+    border-left:2px solid var(--gold-500);
+    border-radius:0 5px 5px 0;
+    background:#fbf6ea;
+    color:#756a58;
+    font-size:12px;
+    line-height:1.65;
+    overflow-wrap:break-word;
+  }
+  .law-snippet mark{background:#ecd28a;color:inherit;padding:0 1px;border-radius:2px}
+  .law-state{
+    flex:0 0 auto;
+    padding:2px 8px;
+    border:1px solid #f0dfb8;
+    border-radius:999px;
+    background:#fdf3df;
+    color:#a36a1f;
+    font-size:10.5px;
+    white-space:nowrap;
+  }
+  .law-arrow{flex:0 0 auto;color:#c2b396;font-size:19px;line-height:1;transition:transform .16s,color .16s}
+  .law-row:hover .law-arrow{transform:translateX(2px);color:var(--gold-600)}
+  .law-row[data-sec="constitution"] .law-no{border-color:#dcc385;background:#f9efd4;color:#8e6b1d}
+  .law-row[data-sec="pending"] .law-state{border-color:#efcf9b;background:#fdf0d8;color:#a7640e}
+  .law-state.in{border-color:#cfe3d3;background:#eef7ef;color:#2f6b3b}
+
+  /* ============ Empty ============ */
+  .empty{
+    padding:54px 24px;
+    border:1px dashed #d9c9a8;
+    border-radius:16px;
+    background:rgba(255,253,248,.7);
+    text-align:center;
+  }
+  .empty-seal{
+    width:64px;height:64px;
+    margin:0 auto 14px;
+    display:grid;place-items:center;
+    border:2px solid #ddcda9;
+    border-radius:12px;
+    color:#b39a67;
+    font-family:var(--serif);
+    font-size:30px;
+    background:#faf4e6;
+  }
+  .empty h3{margin:0 0 6px;font-family:var(--serif);font-size:20px;color:#5f5340;letter-spacing:.06em}
+  .empty p{margin:0 0 16px;font-size:13px;color:var(--muted)}
+  .empty button{
+    border:1px solid var(--red-800);
+    border-radius:8px;
+    padding:7px 16px;
+    background:var(--red-800);
+    color:#fff;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .empty button:hover{background:var(--red-700)}
+
+  /* ============ Modal ============ */
+  .modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px}
+  .modal-backdrop{position:absolute;inset:0;background:rgba(38,12,8,.56);backdrop-filter:blur(5px)}
+  .modal-card{
+    position:relative;
+    width:min(570px,100%);
+    max-height:calc(100vh - 40px);
+    overflow:auto;
+    padding:28px 28px 24px;
+    border:1px solid #e5d7bb;
+    border-top:4px solid var(--red-800);
+    border-radius:18px;
+    background:var(--card);
+    box-shadow:0 28px 80px rgba(40,10,5,.34);
+  }
+  .modal-close{
+    position:absolute;top:14px;right:14px;
+    width:32px;height:32px;display:grid;place-items:center;
+    border:1px solid #e6dac2;border-radius:50%;
+    background:#faf3e4;color:#8b7858;font-size:19px;line-height:1;cursor:pointer;
+  }
+  .modal-close:hover{background:#f3e7cf;color:var(--red-800)}
+  .modal-kicker{margin:0 0 4px;font-size:9.5px;letter-spacing:.24em;color:var(--gold-600);font-weight:700}
+  .modal-card h2{margin:0 0 12px;font-family:var(--serif);font-size:23px;line-height:1.45;letter-spacing:.03em;color:var(--red-900);padding-right:34px}
+  .modal-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+  .tag{padding:3px 10px;border-radius:999px;font-size:11.5px;border:1px solid #e4d8c0;background:#faf3e4;color:#77664a}
+  .tag.red{border-color:#ecd2cd;background:#f9eae7;color:var(--red-800)}
+  .tag.gold{border-color:#ead9a7;background:#fdf6e3;color:#8a6a2a}
+  .modal-dl{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:0 0 18px;border:1px solid #ece2cf;border-radius:12px;overflow:hidden;background:#ece2cf}
+  .modal-dl div{padding:10px 13px;background:#fffdf8}
+  .modal-dl dt{margin:0;font-size:10.5px;letter-spacing:.1em;color:#9a8c74}
+  .modal-dl dd{margin:2px 0 0;font-size:13.5px;color:#3b3832}
+  .modal-dl dd.warn{color:#a7640e;font-weight:600}
+  .modal-dl dd.ok{color:#2f6b3b;font-weight:600}
+  .modal-read{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    margin:0 0 14px;padding:11px 16px;border-radius:10px;
+    background:var(--red-800);color:#fff;text-decoration:none;
+    font-size:14px;font-weight:600;letter-spacing:.04em;
+    box-shadow:0 8px 20px rgba(140,22,28,.18);
+    transition:background .18s,transform .18s;
+  }
+  .modal-read:hover{background:var(--red-700);transform:translateY(-1px)}
+  .modal-empty{
+    padding:17px 16px;border:1px dashed #dcc79a;border-radius:12px;
+    background:linear-gradient(145deg,#fdf6e3,#fffaf0);text-align:center;
+  }
+  .modal-empty strong{display:block;font-family:var(--serif);font-size:15px;color:#7a5e25;letter-spacing:.08em}
+  .modal-empty p{margin:5px 0 0;font-size:12px;line-height:1.75;color:#8c7a58}
+
+  /* ============ Footer ============ */
+  footer{
+    position:relative;
+    margin-top:10px;
+    padding:30px 0 26px;
+    background:linear-gradient(110deg,#5e0a0e,#771015 55%,#5a090d);
+    color:rgba(255,255,255,.7);
+    border-top:3px solid var(--gold-500);
+  }
+  .footer-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:22px;flex-wrap:wrap}
+  .footer-brand{display:flex;align-items:center;gap:11px;color:var(--gold-200);font-family:var(--serif);font-size:16px;letter-spacing:.1em}
+  footer p{margin:0;font-size:12px;line-height:1.85}
+  .footer-meta{text-align:right}
+  .footer-quote{color:#f0dfb2 !important;font-family:var(--serif);font-size:14px !important;letter-spacing:.1em;margin-top:3px !important}
+  .footer-status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:6px !important;font-size:12px !important;color:rgba(255,255,255,.68) !important}
+  .footer-check{border:1px solid rgba(239,223,174,.42);border-radius:6px;background:rgba(255,255,255,.06);color:var(--gold-200);padding:2px 8px;font-size:11px;cursor:pointer;transition:background .18s}
+  .footer-check:hover{background:rgba(255,255,255,.13)}
+
+  /* ============ Responsive ============ */
+  @media (max-width: 980px){
+    .layout{grid-template-columns:1fr;gap:0;padding-top:26px}
+    .sidebar{display:none}
+    .search-card{top:8px}
+    .section-head h2{font-size:23px}
+  }
+  @media (max-width: 720px){
+    .wrap{width:min(100% - 30px, 1240px)}
+    .hero-inner{padding:30px 0 30px}
+    .seal{width:52px;height:52px;font-size:29px}
+    .brand h1{font-size:30px}
+    .hero-tag{display:none}
+    .key-hint{display:none}
+    .hero-quote{margin-top:24px;font-size:16px}
+    .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:24px}
+    .stat strong{font-size:25px}
+    .pillars{gap:9px;font-size:11.5px;letter-spacing:.1em}
+    .pillars span{gap:9px}
+    .law-state{display:none}
+    .law-row{padding:9px 11px;gap:10px}
+    .law-title{font-size:14px}
+    .section-head{flex-wrap:wrap;gap:8px}
+    .section-head h2{font-size:21px}
+    .footer-inner{display:block}
+    .footer-meta{text-align:left;margin-top:12px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-rule top"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-top">
+      <div class="brand">
+        <div class="seal" aria-hidden="true">法</div>
+        <div>
+          <p class="kicker">习近平法治思想 · 中国特色社会主义法治体系</p>
+          <h1>国家法律索引</h1>
+          <p class="en-title">NATIONAL LAW INDEX</p>
+        </div>
+      </div>
+      <div class="hero-tag">名称索引 · 全文可读</div>
+    </div>
+
+    <p class="hero-quote">“全面依法治国是国家治理的一场深刻革命”</p>
+    <p class="hero-sub">坚持党的领导、人民当家作主、依法治国有机统一，坚定不移走中国特色社会主义法治道路，建设中国特色社会主义法治体系、建设社会主义法治国家。</p>
+
+    <div class="pillars" aria-label="社会主义法治工作基本格局">
+      <span>科学立法</span><span>严格执法</span><span>公正司法</span><span>全民守法</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><strong id="statTotal">0</strong><span>索引条目</span></div>
+      <div class="stat"><strong id="statLaws">0</strong><span>现行有效法律</span></div>
+      <div class="stat"><strong id="statPending">0</strong><span>尚未生效</span></div>
+      <div class="stat"><strong id="statStored">0</strong><span>正文已入库</span></div>
+    </div>
+  </div>
+  <div class="hero-rule bottom"></div>
+</header>
+
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="目录导航">
+    <div class="side-card">
+      <p class="side-title">目 录 导 航</p>
+      <nav class="nav" id="sideNav"></nav>
+      <div class="side-note">
+        <b>收 录 说 明</b>
+        <p>依据国家法律法规数据库整理，收录宪法、现行有效法律及附录文件。法律正文按篇独立存放，支持在线阅读、检索与打印。</p>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="search-card">
+      <div class="search-row">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+        <input id="searchInput" type="search" autocomplete="off" spellcheck="false"
+               placeholder="搜索标题或正文，例如：民法典 / 善意取得 / 未成年人"
+               aria-label="搜索标题或正文">
+        <span class="key-hint" aria-hidden="true">/</span>
+        <button class="clear-btn" id="clearBtn" type="button" hidden>清除</button>
+        <button class="panel-toggle" id="panelToggle" type="button" aria-expanded="true" aria-controls="searchPanel" aria-label="显示或隐藏筛选与排序" title="显示或隐藏筛选与排序">
+          <span class="panel-toggle-text">收起</span>
+          <span class="panel-chevron" aria-hidden="true">⌃</span>
+        </button>
+      </div>
+      <div class="search-panel" id="searchPanel">
+      <div class="search-controls">
+        <div class="control-group" role="group" aria-label="搜索范围">
+          <span class="control-label">范围</span>
+          <button class="seg active" type="button" data-scope="all" aria-pressed="true">标题+正文</button>
+          <button class="seg" type="button" data-scope="title" aria-pressed="false">标题</button>
+          <button class="seg" type="button" data-scope="body" aria-pressed="false">正文</button>
+        </div>
+        <div class="control-group" role="group" aria-label="搜索模式">
+          <span class="control-label">模式</span>
+          <button class="seg active" type="button" data-mode="fuzzy" aria-pressed="true">模糊</button>
+          <button class="seg" type="button" data-mode="exact" aria-pressed="false">精确</button>
+        </div>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="按类别筛选"></div>
+      </div>
+    </div>
+
+    <div class="sort-bar">
+      <span class="sort-bar-label">排序方式</span>
+      <button class="seg sort-btn active" type="button" data-sort="time" aria-pressed="true">按时间</button>
+      <button class="seg sort-btn" type="button" data-sort="category" aria-pressed="false">按分类</button>
+      <span class="sort-bar-right">
+        <span class="sort-bar-count" id="resultCount" aria-live="polite">共 0 条索引</span>
+        <span class="search-state" id="searchIndexStatus" hidden></span>
+        <a class="library-link" href="library.html">法律文献库 · 741 份 →</a>
+      </span>
+    </div>
+
+    <div class="notice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M12 10.5v5"></path>
+        <path d="M12 7.5h.01"></path>
+      </svg>
+      <span>本页已收录法律名称 <strong id="noticeTotal">0</strong> 条，其中 <strong id="noticeStored">0</strong> 部已入库全文，<strong id="noticeMissing">0</strong> 部暂未收录。点击任一条目将在新标签页打开全文。</span>
+    </div>
+
+    <div id="lawList"></div>
+
+    <div id="emptyState" class="empty" hidden>
+      <div class="empty-seal" aria-hidden="true">未</div>
+      <h3>未找到相关法律</h3>
+      <p>请尝试更换关键词，或点击“全部”查看完整索引。</p>
+      <button id="emptyReset" type="button">清除搜索条件</button>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-brand"><span class="seal small" aria-hidden="true">法</span> 国家法律索引</div>
+      <p style="margin-top:8px">数据来源：国家法律法规数据库（flk.npc.gov.cn） · 数据版本 <span id="dataVersion">—</span> · <a href="使用说明.txt" target="_blank" style="color:var(--gold-200);text-decoration:underline">使用说明</a></p>
+      <p class="footer-status">正文入库 <strong id="footStored">0</strong> 部 · 共 <strong id="footTotal">0</strong> 部 · <span id="updateStatus">数据版本 —</span><button class="footer-check" id="checkUpdateBtn" type="button">检查更新</button></p>
+    </div>
+    <div class="footer-meta">
+      <p>法治兴则国兴，法治强则国强。</p>
+      <p class="footer-quote">坚持全面依法治国，推进法治中国建设</p>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-backdrop" data-close="1"></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" type="button" aria-label="关闭">×</button>
+    <p class="modal-kicker">法 律 索 引 · 条 目 详 情</p>
+    <h2 id="modalTitle"></h2>
+    <div class="modal-tags">
+      <span class="tag red" id="modalCat"></span>
+      <span class="tag gold" id="modalStatus"></span>
+    </div>
+    <div class="modal-dl">
+      <div><dt>索引编号</dt><dd id="modalNo"></dd></div>
+      <div><dt>所属分类</dt><dd id="modalCat2"></dd></div>
+      <div><dt>效力状态</dt><dd id="modalStatus2"></dd></div>
+      <div><dt>正文状态</dt><dd class="warn" id="modalBodyStatus">暂未入库</dd></div>
+    </div>
+    <a class="modal-read" id="modalRead" href="#" target="_blank" rel="noopener">阅读全文 →</a>
+    <div class="modal-empty" id="modalEmpty">
+      <strong>正文暂未存入</strong>
+      <p>当前版本仅建立法律名称索引，尚未录入法律全文。</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var v = new URLSearchParams(location.search).get('v') || String(Date.now());
+  var s = document.createElement('script');
+  s.src = 'data/laws.js?v=' + encodeURIComponent(v);
+  s.onload = function(){ window.dispatchEvent(new Event('law-data-ready')); };
+  s.onerror = function(){ window.dispatchEvent(new Event('law-data-error')); };
+  document.head.appendChild(s);
+})();
+</script>
+<script src="assets/index-app.js?v=20261105c"></script>
+</body>
+</html>

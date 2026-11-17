@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>house-tool · 小工具集合</title>
+<meta name="description" content="house-tool：高考数学题库、CET 4/6 单词记忆、番茄钟、国家法律索引，四个实用小工具的入口。">
+<meta name="theme-color" content="#0b0d11">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0d11'/%3E%3Cpath d='M16 34 32 20l16 14v14a2 2 0 0 1-2 2H18a2 2 0 0 1-2-2z' fill='none' stroke='%237cb0ff' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  *{box-sizing:border-box}
+  :root{
+    --bg:#0b0d11;
+    --panel:rgba(255,255,255,.045);
+    --line:rgba(255,255,255,.09);
+    --ink:#eef1f6;
+    --muted:#98a2b3;
+    --radius:20px;
+  }
+  html,body{margin:0;padding:0}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(900px 520px at 12% -10%, rgba(70,120,255,.20), transparent 60%),
+      radial-gradient(760px 460px at 92% 4%, rgba(240,170,80,.12), transparent 62%),
+      radial-gradient(800px 620px at 50% 110%, rgba(60,200,170,.10), transparent 64%),
+      var(--bg);
+    color:var(--ink);
+    font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    flex-direction:column;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(circle at 50% 20%,#000 0%,transparent 78%);
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{position:relative;z-index:1;width:100%;max-width:1080px;margin:0 auto;padding:0 22px}
+
+  header{padding:26px 0 0}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .brand svg{width:26px;height:26px;color:#7cb0ff}
+  .brand span{font-size:15.5px}
+  .brand small{color:var(--muted);font-weight:400;font-size:12px;letter-spacing:.08em;margin-left:2px}
+
+  main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:52px 0 26px}
+  .hero{max-width:660px}
+  .kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#9fc0ff;
+    border:1px solid rgba(124,176,255,.28);background:rgba(124,176,255,.08);
+    padding:5px 12px;border-radius:999px;
+  }
+  .kicker i{width:6px;height:6px;border-radius:50%;background:#7cb0ff;box-shadow:0 0 10px #7cb0ff}
+  h1{
+    margin:20px 0 12px;
+    font-size:clamp(34px,6vw,56px);
+    line-height:1.1;
+    letter-spacing:-.02em;
+    font-weight:750;
+  }
+  h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg,#7cb0ff,#a8ffd8 55%,#ffd18a);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lead{margin:0;color:var(--muted);font-size:15.5px;max-width:560px}
+
+  .grid{
+    margin-top:42px;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+  }
+  .card{
+    position:relative;
+    display:flex;flex-direction:column;gap:14px;
+    padding:24px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.022));
+    box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 18px 40px -22px rgba(0,0,0,.9);
+    overflow:hidden;
+    transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+  }
+  .card::after{
+    content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;opacity:0;
+    background:radial-gradient(340px 180px at var(--x,50%) 0%,var(--glow,rgba(124,176,255,.18)),transparent 70%);
+    transition:opacity .25s ease;
+  }
+  .card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.18);box-shadow:0 1px 0 rgba(255,255,255,.07) inset,0 28px 60px -26px rgba(0,0,0,1)}
+  .card:hover::after{opacity:1}
+  .card:focus-visible{outline:2px solid #7cb0ff;outline-offset:3px}
+  .icon{
+    width:44px;height:44px;border-radius:13px;display:grid;place-items:center;
+    background:var(--tint,rgba(124,176,255,.14));
+    color:var(--accent,#7cb0ff);
+    border:1px solid rgba(255,255,255,.07);
+  }
+  .icon svg{width:23px;height:23px}
+  .card h2{margin:0;font-size:17.5px;letter-spacing:.01em;display:flex;align-items:center;gap:8px}
+  .card p{margin:0;color:var(--muted);font-size:13.4px;line-height:1.65}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .tag{font-size:11.5px;color:#b9c2d0;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:999px;padding:3px 9px}
+  .go{
+    margin-top:auto;display:inline-flex;align-items:center;gap:7px;
+    font-size:13px;color:var(--accent,#7cb0ff);font-weight:600;
+  }
+  .go svg{width:15px;height:15px;transition:transform .22s ease}
+  .card:hover .go svg{transform:translateX(4px)}
+
+  .c-cee{--accent:#7cb0ff;--tint:rgba(124,176,255,.14);--glow:rgba(124,176,255,.20)}
+  .c-cet{--accent:#67e2b5;--tint:rgba(103,226,181,.13);--glow:rgba(103,226,181,.18)}
+  .c-clock{--accent:#ffb570;--tint:rgba(255,181,112,.13);--glow:rgba(255,181,112,.18)}
+  .c-law{--accent:#ff8f9c;--tint:rgba(255,143,156,.13);--glow:rgba(255,143,156,.18)}
+
+  footer{padding:26px 0 40px;color:#77808f;font-size:12.5px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+  footer code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#a8b2c1}
+
+  @media (max-width:720px){
+    .grid{grid-template-columns:1fr;gap:13px;margin-top:30px}
+    main{padding-top:36px}
+    .card{padding:20px}
+    h1{margin-top:16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/>
+      </svg>
+      <span>house-tool</span><small>小工具集合</small>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="kicker"><i></i>四件常用工具</span>
+      <h1>把常用的东西，<em>放在一个房子</em>里。</h1>
+      <p class="lead">高考数学题库、CET 4/6 单词记忆、番茄专注计时、国家法律索引。全部纯前端运行，数据保存在你自己的浏览器里。</p>
+    </section>
+
+    <section class="grid" aria-label="工具列表">
+      <a class="card c-cee" href="cee/">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3.5" y="3" width="17" height="18" rx="2.5"/>
+            <path d="M8 8.5h3.2L8 15.5h3.2M14 11.2c1.2-1.2 2.6-.9 2.6.6 0 1.6-2.6 1.4-2.6 3.2 0 1.1 1.1 1.4 2.6.6"/>
+          </svg>
+        </span>
+        <h2>高考数学题库</h2>
+        <p>1977–2026 共 643 套真题，按年份、卷别筛选，支持题目速览与原卷定位。</p>
+        <div class="meta"><span class="tag">1977–2026</span><span class="tag">643 套</span><span class="tag">原卷 PDF</span></div>
+        <span class="go">进入题库
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card c-cet" href="cet46/">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16.5A2.5 2.5 0 0 0 17.5 17H4z"/>
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M8 7h8M8 10.5h5"/>
+          </svg>
+        </span>
+        <h2>词屿 · CET 4/6</h2>
+        <p>为四六级打造的轻量单词空间，闪卡、拼写、测验与间隔复习，进度自动保存。</p>
+        <div class="meta"><span class="tag">闪卡</span><span class="tag">拼写</span><span class="tag">间隔复习</span></div>
+        <span class="go">开始背词
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card c-clock" href="clock/">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="13" r="8"/>
+            <path d="M12 9v4.2l2.6 1.8M9 2.5h6"/>
+          </svg>
+        </span>
+        <h2>番茄钟</h2>
+        <p>专注与休息的节奏计时器，可自选壁纸、背景音乐与白噪音，附带 AI 对话面板。</p>
+        <div class="meta"><span class="tag">专注计时</span><span class="tag">背景音乐</span><span class="tag">离线可用</span></div>
+        <span class="go">开始专注
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card c-law" href="law/">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v18M7 21h10M5 6.5h14M12 3.5 5 6.5M12 3.5l7 3"/>
+            <path d="M2.5 12.5a2.6 2.6 0 0 0 5 0L5 6.5zM16.5 12.5a2.6 2.6 0 0 0 5 0L19 6.5z"/>
+          </svg>
+        </span>
+        <h2>国家法律索引</h2>
+        <p>中国特色社会主义法治体系索引，按法律类型与时间整理，支持标题与全文检索。</p>
+        <div class="meta"><span class="tag">宪法</span><span class="tag">741 份文件</span><span class="tag">全文搜索</span></div>
+        <span class="go">查阅法律
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="y">2026</span> house-tool · 纯静态站点，部署于 GitHub Pages</span>
+    <span><code>house-tool.top</code></span>
+  </footer>
+</div>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  document.querySelectorAll('.card').forEach(function (card) {
+    card.addEventListener('pointermove', function (e) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--x', ((e.clientX - r.left) / r.width * 100) + '%');
+    });
+  });
+</script>
+</body>
+</html>

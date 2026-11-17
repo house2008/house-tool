@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>高考数学题库 1977–2026</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<meta name="theme-color" content="#2563eb">
+<script>
+try{
+  var st=JSON.parse(localStorage.getItem('cee_settings_v1'))||{}, de=document.documentElement;
+  if(st.theme && st.theme!=='auto') de.dataset.theme=st.theme;
+  if(st.bw) de.classList.add('bw');
+  if(st.fs) de.style.setProperty('--fs', st.fs);
+  if(st.font && st.font!=='system') de.dataset.font=st.font;
+}catch(e){}
+</script>
+<style>
+:root{
+  --bg:#f6f7f9; --panel:#fff; --ink:#1c1f24; --muted:#6b7280; --line:#e5e7eb;
+  --accent:#2563eb; --accent-weak:#eff4ff; --bad:#dc2626; --good:#059669;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06);
+  --radius:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0f1115;--panel:#171a20;--ink:#e6e8ec;--muted:#9aa1ac;--line:#2a2f38;
+        --accent:#6ea8fe;--accent-weak:#1b2433;--shadow:0 8px 24px rgba(0,0,0,.35);}
+  .thumb{background:#fff}
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--accent)}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hwrap{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:7px;font-weight:700;font-size:17px;letter-spacing:.3px;white-space:nowrap}
+.brandicon{width:24px;height:24px;border-radius:6px;flex:0 0 auto;box-shadow:0 1px 2px rgba(16,24,40,.18)}
+.brand small{font-weight:400;color:var(--muted);font-size:12px;margin-left:0}
+nav{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
+nav button{border:0;background:transparent;padding:6px 14px;border-radius:999px;color:var(--muted)}
+nav button.on{background:var(--accent);color:#fff}
+.spacer{flex:1}
+main{max-width:1180px;margin:0 auto;padding:18px}
+.hint{color:var(--muted);font-size:12.5px}
+.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.field{display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 10px}
+.field select,.field input{border:0;background:transparent;outline:none;min-width:56px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 12px;color:var(--muted)}
+.chip.on{border-color:var(--accent);color:var(--accent);background:var(--accent-weak)}
+.search{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:7px 12px}
+.search input{border:0;background:transparent;outline:none;width:100%}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.paper{margin-bottom:10px;overflow:hidden}
+.phead{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;user-select:none}
+.phead:hover{background:color-mix(in srgb,var(--accent-weak) 60%,transparent)}
+.phead .yr{font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent);min-width:44px}
+.phead .ttl{font-weight:600}
+.phead .meta{color:var(--muted);font-size:12.5px}
+.phead .arrow{margin-left:auto;color:var(--muted);transition:transform .15s}
+.paper.open .arrow{transform:rotate(90deg)}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;padding:4px 14px 16px}
+.qitem{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;cursor:zoom-in;transition:border-color .12s,transform .12s}
+.qitem:hover{border-color:var(--accent);transform:translateY(-1px)}
+.qitem .lab{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:6px}
+.qitem .thumbwrap{height:140px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff;border-radius:6px}
+.qitem img.thumb{max-width:100%;max-height:140px;width:auto;height:auto;display:block}
+.qitem.bad{border-color:var(--bad)}
+.badge{font-size:11px;padding:1px 6px;border-radius:999px;background:var(--accent-weak);color:var(--accent)}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 16px}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 14px}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{filter:brightness(1.05);color:#fff}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--muted)}
+.btn.small{padding:4px 9px;border-radius:8px;font-size:12.5px}
+.practice-setup{max-width:760px;margin:0 auto}
+.practice-setup h2{margin:6px 0 4px;font-size:20px}
+.setup-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:18px}
+.setup-grid label{display:block;color:var(--muted);font-size:12.5px;margin-bottom:4px}
+.setup-grid .field{width:100%}
+.startbar{padding:0 18px 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pr-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.progress{flex:1;min-width:160px;height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent);width:0}
+.pr-card{padding:12px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.pr-card .paperline{width:100%;display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12.5px}
+.pr-card img{max-width:100%;max-height:62vh;background:#fff;border-radius:8px;cursor:zoom-in}
+.pr-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:12px}
+.pr-actions .ok{border-color:var(--good);color:var(--good)}
+.pr-actions .no{border-color:var(--bad);color:var(--bad)}
+.endbox{padding:22px;text-align:center}
+.endbox .big{font-size:30px;font-weight:700}
+.endbox .stat{color:var(--muted);margin:4px 0 16px}
+.missgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;padding:0 18px 18px;text-align:left}
+.empty{color:var(--muted);text-align:center;padding:40px 10px}
+#viewer{position:fixed;inset:0;background:#0b0e13;z-index:100;display:none;flex-direction:column}
+#viewer.on{display:flex}
+#viewer .vbar{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#e8eaee;font-size:13px;flex-wrap:wrap}
+#viewer .vbar .sp{flex:1}
+#viewer .vbar button{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:6px 11px}
+#viewer .vbody{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:8px 16px 24px}
+#viewer img{background:#fff;border-radius:4px;height:auto;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+#viewer .nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;width:42px;height:64px;border-radius:10px;font-size:22px}
+#viewer .nav.prev{left:10px}#viewer .nav.next{right:10px}
+#viewer .cap{text-align:center;color:#cbd2dc;padding:0 14px 10px;font-size:13px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#111;color:#fff;padding:9px 16px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:200}
+.toast.on{opacity:1}
+@media (max-width:600px){
+  .hwrap{padding:8px 12px;gap:10px}
+  main{padding:12px}
+  nav button{padding:5px 10px}
+  .qgrid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+  .brand small{display:none}
+}
+/* ---------- 用户设置 ---------- */
+:root{--fs:1;--ui-font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+body{font-family:var(--ui-font);font-size:calc(15px * var(--fs))}
+:root[data-font="hei"] body{font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif}
+:root[data-font="song"] body{font-family:"Songti SC",SimSun,"Noto Serif CJK SC","Source Han Serif SC",serif}
+.brand{font-size:calc(18px * var(--fs))}
+.brand small{font-size:calc(14px * var(--fs))}
+.hint{font-size:calc(14px * var(--fs))}
+nav button{font-size:calc(15px * var(--fs))}
+.phead .meta{font-size:calc(14px * var(--fs))}
+.qitem .lab{font-size:calc(14px * var(--fs))}
+.badge{font-size:calc(12.5px * var(--fs))}
+.btn.small{font-size:calc(14px * var(--fs))}
+.setup-grid label{font-size:calc(14px * var(--fs))}
+.pr-card .paperline{font-size:calc(14px * var(--fs))}
+.endbox .big{font-size:calc(32px * var(--fs))}
+#viewer .vbar{font-size:calc(14px * var(--fs))}
+#viewer .cap{font-size:calc(14px * var(--fs))}
+.toast{font-size:calc(14px * var(--fs))}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+.seg button{border:0;border-right:1px solid var(--line);background:transparent;padding:7px 13px;color:var(--muted);font-size:calc(14px * var(--fs))}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--accent);color:#fff}
+.setrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid var(--line)}
+.setrow:last-child{border-bottom:0}
+.setrow .slab{width:96px;color:var(--muted);font-size:calc(14px * var(--fs));flex:0 0 auto}
+.setrow .sval{color:var(--muted);font-size:calc(14px * var(--fs))}
+.fs-preview{font-size:calc(16px * var(--fs));color:var(--ink);opacity:.85}
+.btn.danger{border-color:var(--bad);color:var(--bad)}
+.btn.danger:hover{background:var(--bad);color:#fff;border-color:var(--bad)}
+html.bw{filter:grayscale(1)}
+:root[data-theme="light"]{--bg:#f6f7f9;--panel:#fff;--ink:#1c1f24;--muted:#6b7280;--line:#e5e7eb;--accent:#2563eb;--accent-weak:#eff4ff;--bad:#dc2626;--good:#059669;--shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06)}
+:root[data-theme="dark"]{--bg:#0f1115;--panel:#171a20;--ink:#e6e8ec;--muted:#9aa1ac;--line:#2a2f38;--accent:#6ea8fe;--accent-weak:#1b2433;--bad:#f87171;--good:#34d399;--shadow:0 8px 24px rgba(0,0,0,.35)}
+#modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:24px}
+#modal.on{display:flex}
+#modal .mask{position:absolute;inset:0;background:rgba(8,10,14,.45);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.modal-card{position:relative;width:min(420px,100%);background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 22px 18px;box-shadow:0 24px 70px rgba(0,0,0,.38);animation:mpop .16s ease-out}
+@keyframes mpop{from{opacity:0;transform:translateY(6px) scale(.97)}to{opacity:1;transform:none}}
+.modal-card h3{margin:0 0 8px;font-size:calc(18px * var(--fs))}
+.modal-card p{margin:0;color:var(--muted);font-size:calc(14.5px * var(--fs));line-height:1.7;white-space:pre-line}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+.btn.danger.solid{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn.danger.solid:hover{filter:brightness(1.06);color:#fff}
+@media (prefers-reduced-motion:reduce){.modal-card{animation:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hwrap">
+    <div class="brand"><img class="brandicon" src="icon.svg" alt=""> 高考数学题库 <small id="sub">1977–2026</small></div>
+    <nav>
+      <button data-tab="browse" class="on">浏览</button>
+      <button data-tab="practice">练习</button>
+      <button data-tab="missed">错题本</button>
+      <button data-tab="settings">设置</button>
+    </nav>
+    <div class="spacer"></div>
+    <div class="hint" id="topinfo"></div>
+  </div>
+</header>
+
+<main>
+  <section id="tab-browse">
+    <div class="filters">
+      <div class="search"><span style="color:var(--muted)">⌕</span><input id="q" placeholder="搜索试卷名称或题干关键词，如：椭圆、数列、北京卷"></div>
+      <div class="field">年份
+        <select id="yf"></select>—<select id="yt"></select>
+      </div>
+    </div>
+    <div class="filters chips" id="cats"></div>
+    <div class="toolbar">
+      <span class="hint" id="resinfo"></span>
+      <span class="hint" style="opacity:.7">· 点击题图可放大，题目不含答案</span>
+      <span class="spacer"></span>
+      <button class="btn small" id="randomOne">随便看看一道</button>
+    </div>
+    <div id="papers"></div>
+  </section>
+
+  <section id="tab-practice" style="display:none"></section>
+  <section id="tab-missed" style="display:none"></section>
+  <section id="tab-settings" style="display:none"></section>
+</main>
+
+<div id="viewer">
+  <div class="vbar">
+    <b id="vcap"></b>
+    <span id="vmeta" style="color:#9aa3af"></span>
+    <span class="sp"></span>
+    <button id="vzoomout">−</button>
+    <button id="vzoomin">＋</button>
+    <button id="vreset">100%</button>
+    <button id="vpdf">原卷</button>
+    <button id="vclose">关闭 ✕</button>
+  </div>
+  <div class="vbody"><img id="vimg" alt=""></div>
+  <button class="nav prev" id="vprev">‹</button>
+  <button class="nav next" id="vnext">›</button>
+  <div class="cap" id="vcap2"></div>
+</div>
+<div id="modal" aria-hidden="true">
+  <div class="mask"></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="mtitle" aria-describedby="mmsg">
+    <h3 id="mtitle">请确认</h3>
+    <p id="mmsg"></p>
+    <div class="modal-actions">
+      <button class="btn" id="mcancel">取消</button>
+      <button class="btn primary" id="mok">确定</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+'use strict';
+const BANK = window.BANK;
+const Q = BANK.questions;
+const P = BANK.papers;
+const META = BANK.meta || {};
+const byPaper = new Map();
+Q.forEach(q => { if(!byPaper.has(q.p)) byPaper.set(q.p, []); byPaper.get(q.p).push(q); });
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const debounce = (fn,ms)=>{let t;return (...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}};
+const store = {
+  get(k,d){ try{ const v = JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+const MISS_KEY='cee_missed_v1', SEEN_KEY='cee_seen_v1';
+let missed = new Set(store.get(MISS_KEY, []));
+let seen = new Set(store.get(SEEN_KEY, []));
+const saveMissed = ()=>store.set(MISS_KEY,[...missed]);
+const saveSeen = ()=>store.set(SEEN_KEY,[...seen]);
+const SET_KEY='cee_settings_v1';
+const DEF_SET={theme:'auto',bw:false,fs:1,font:'system',timer:true};
+let settings = Object.assign({}, DEF_SET, store.get(SET_KEY,{}));
+const saveSettings = ()=>store.set(SET_KEY, settings);
+function applySettings(){
+  const d = document.documentElement;
+  if(settings.theme==='auto'){ delete d.dataset.theme; } else { d.dataset.theme = settings.theme; }
+  d.classList.toggle('bw', !!settings.bw);
+  d.style.setProperty('--fs', settings.fs);
+  if(settings.font==='system'){ delete d.dataset.font; } else { d.dataset.font = settings.font; }
+}
+applySettings();
+
+const years = [...new Set(P.map(p=>p.year))].sort((a,b)=>a-b);
+const ymin = years[0], ymax = years[years.length-1];
+const CATS = ['全部','新高考','全国卷','省份卷','春季'];
+const state = { tab:'browse', yf:ymin, yt:ymax, cat:'全部', query:'', open:new Set() };
+
+/* ---------- header / tabs ---------- */
+$('#sub').textContent = `${ymin}–${ymax} · ${Q.length} 题 · ${P.length} 套`;
+$('#topinfo').textContent = `共 ${Q.length} 道题`;
+function switchTab(tab){
+  document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on', x.dataset.tab===tab));
+  ['browse','practice','missed','settings'].forEach(t=>$('#tab-'+t).style.display = t===tab?'':'none');
+  state.tab = tab;
+  if(tab==='practice' && !state.practice) renderSetup();
+  if(tab==='missed') renderMissed();
+  if(tab==='settings') renderSettings();
+}
+document.querySelectorAll('nav button').forEach(b=>{ b.onclick = ()=>switchTab(b.dataset.tab); });
+
+/* ---------- browse ---------- */
+const yf = $('#yf'), yt = $('#yt');
+years.forEach(y=>{ yf.add(new Option(y,y)); yt.add(new Option(y,y)); });
+yf.value = ymin; yt.value = ymax;
+yf.onchange = ()=>{ state.yf = +yf.value; if(state.yf>state.yt){ state.yt=state.yf; yt.value=state.yt; } renderBrowse(); };
+yt.onchange = ()=>{ state.yt = +yt.value; if(state.yt<state.yf){ state.yf=state.yt; yf.value=state.yf; } renderBrowse(); };
+
+function renderCats(){
+  const box = $('#cats'); box.innerHTML='';
+  CATS.forEach(c=>{
+    const n = c==='全部' ? P.length : P.filter(p=>p.cat===c).length;
+    const b = document.createElement('button');
+    b.className = 'chip'+(state.cat===c?' on':'');
+    b.textContent = `${c} ${n}`;
+    b.onclick = ()=>{ state.cat=c; renderCats(); renderBrowse(); };
+    box.appendChild(b);
+  });
+}
+renderCats();
+
+let searchTimer = null;
+$('#q').addEventListener('input', debounce(e=>{ state.query = e.target.value.trim(); renderBrowse(); }, 200));
+
+function paperMatches(p, q){
+  if(!q) return true;
+  if(`${p.year} ${p.title} ${p.kind} ${p.name}`.includes(q)) return true;
+  const qs = byPaper.get(p.i)||[];
+  return qs.some(x=>(x.t||'').includes(q));
+}
+function visibleQuestions(p){
+  const qs = byPaper.get(p.i)||[];
+  if(!state.query) return qs;
+  if(`${p.year} ${p.title} ${p.kind} ${p.name}`.includes(state.query)) return qs;
+  return qs.filter(x=>(x.t||'').includes(state.query));
+}
+
+function paperCard(p){
+  const qs = visibleQuestions(p);
+  if(!qs.length) return null;
+  const el = document.createElement('div');
+  el.className = 'card paper'+(state.open.has(p.i)?' open':'');
+  el.dataset.p = p.i;
+  el.innerHTML = `
+    <div class="phead">
+      <span class="yr">${p.year}</span>
+      <span class="ttl">${esc(p.title||p.name)}</span>
+      <span class="meta">${esc(p.kind||'')} · ${qs.length} 题</span>
+      <span class="arrow">›</span>
+    </div>
+    <div class="qgrid" style="display:${state.open.has(p.i)?'grid':'none'}"></div>`;
+  el.querySelector('.phead').onclick = ()=>{
+    const open = state.open.has(p.i);
+    if(open){ state.open.delete(p.i); el.classList.remove('open'); el.querySelector('.qgrid').style.display='none'; }
+    else { state.open.add(p.i); el.classList.add('open'); el.querySelector('.qgrid').style.display='grid'; fillGrid(el, p, qs); }
+  };
+  if(state.open.has(p.i)) fillGrid(el, p, qs);
+  return el;
+}
+function fillGrid(el, p, qs){
+  const g = el.querySelector('.qgrid');
+  if(g.dataset.filled) return; g.dataset.filled = '1';
+  const frag = document.createDocumentFragment();
+  qs.forEach((q, idx)=>{
+    const d = document.createElement('div');
+    d.className = 'qitem'+(missed.has(q.i)?' bad':'');
+    d.innerHTML = `<div class="lab"><span>第 ${q.n} 题</span><span class="badge" title="原卷第 ${q.pg} 页">P${q.pg}</span></div>
+      <div class="thumbwrap"><img class="thumb" loading="lazy" src="img/${q.img}" alt="第${q.n}题"></div>`;
+    d.onclick = ()=>openViewer(qs.map(x=>x.i), idx);
+    frag.appendChild(d);
+  });
+  g.appendChild(frag);
+}
+
+function renderBrowse(){
+  const box = $('#papers'); box.innerHTML='';
+  const list = P.filter(p=>p.year>=state.yf && p.year<=state.yt && (state.cat==='全部'||p.cat===state.cat) && paperMatches(p, state.query))
+                 .sort((a,b)=> a.year-b.year || a.i-b.i);
+  let total = 0;
+  const frag = document.createDocumentFragment();
+  list.forEach(p=>{ const el = paperCard(p); if(el){ total += visibleQuestions(p).length; frag.appendChild(el); } });
+  box.appendChild(frag);
+  $('#resinfo').textContent = `筛选结果：${list.length} 套试卷 · ${total} 题${state.query?'（已按关键词过滤）':''}`;
+  if(!list.length) box.innerHTML = '<div class="empty">没有匹配的题目，换个关键词或年份试试。</div>';
+}
+renderBrowse();
+
+$('#randomOne').onclick = ()=>{
+  const p = P.filter(p=>p.year>=state.yf && p.year<=state.yt && (state.cat==='全部'||p.cat===state.cat));
+  if(!p.length) return;
+  const pp = p[Math.floor(Math.random()*p.length)];
+  const qs = byPaper.get(pp.i)||[];
+  const q = qs[Math.floor(Math.random()*qs.length)];
+  openViewer(qs.map(x=>x.i), qs.indexOf(q));
+};
+
+/* ---------- viewer ---------- */
+const viewer = $('#viewer'), vimg = $('#vimg');
+let vlist = [], vpos = 0, vzoom = 1, vq = null;
+function fitW(){ return Math.min(vq && vq.w ? vq.w : 900, Math.max(320, window.innerWidth-64)); }
+function pdfHref(q){ return encodeURI(`高考数学（1977 - 2026）.pdf`)+'#page='+q.pg; }
+function openViewer(ids, pos){
+  if(!ids || !ids.length) return;
+  vlist = ids.map(i=>Q[i-1]);
+  vpos = Math.max(0, Math.min(pos, vlist.length-1));
+  vzoom = 1;
+  viewer.classList.add('on');
+  showV();
+}
+function showV(){
+  const q = vlist[vpos], p = P[q.p];
+  $('#vcap').textContent = `${p.year} ${p.title} · 第 ${q.n} 题`;
+  $('#vmeta').textContent = `${vpos+1} / ${vlist.length} · P${q.pg}`;
+  $('#vcap2').textContent = `${p.kind||''}${p.name?('（'+p.name+'）'):''}`;
+  vq = q;
+  vimg.style.width = fitW()+'px';
+  vimg.style.height = 'auto';
+  vimg.src = 'img/'+q.img;
+  $('#vpdf').onclick = ()=>window.open(pdfHref(q), '_blank');
+  $('#vprev').style.display = vlist.length>1?'':'none';
+  $('#vnext').style.display = vlist.length>1?'':'none';
+}
+function setZoom(z){
+  vzoom = Math.max(.4, Math.min(4, z));
+  vimg.style.width = Math.round(fitW()*vzoom)+'px';
+  $('#vreset').textContent = Math.round(vzoom*100)+'%';
+}
+$('#vzoomin').onclick = ()=>setZoom(vzoom+0.25);
+$('#vzoomout').onclick = ()=>setZoom(vzoom-0.25);
+$('#vreset').onclick = ()=>{ setZoom(1); $('.vbody').scrollTop=0; };
+$('#vclose').onclick = ()=>viewer.classList.remove('on');
+$('#vprev').onclick = ()=>{ if(vpos>0){vpos--; showV();} };
+$('#vnext').onclick = ()=>{ if(vpos<vlist.length-1){vpos++; showV();} };
+viewer.addEventListener('click', e=>{ if(e.target===viewer) viewer.classList.remove('on'); });
+document.addEventListener('keydown', e=>{
+  if(!viewer.classList.contains('on')) return;
+  if(e.key==='Escape') viewer.classList.remove('on');
+  if(e.key==='ArrowLeft' && vpos>0){ vpos--; showV(); }
+  if(e.key==='ArrowRight' && vpos<vlist.length-1){ vpos++; showV(); }
+});
+
+/* ---------- practice ---------- */
+const pt = $('#tab-practice');
+function catMatch(p, cat){ return cat==='全部' || p.cat===cat; }
+function renderSetup(){
+  const opts = years.map(y=>`<option value="${y}">${y}</option>`).join('');
+  const cats = CATS.map(c=>`<option>${c}</option>`).join('');
+  pt.innerHTML = `
+  <div class="card practice-setup">
+    <div style="padding:18px 18px 0">
+      <h2>随机练习</h2>
+      <div class="hint">从题库中随机抽题，做完后自评“会/不会”，不会的自动进入错题本。题库不含答案，请对照纸笔自行核对。</div>
+    </div>
+    <div class="setup-grid">
+      <div><label>起始年份</label><div class="field"><select id="pfy">${opts}</select></div></div>
+      <div><label>结束年份</label><div class="field"><select id="pty">${opts}</select></div></div>
+      <div><label>卷别类型</label><div class="field"><select id="pcat">${cats}</select></div></div>
+      <div><label>题量</label><div class="field"><select id="pnum">
+        <option>5</option><option selected>10</option><option>20</option><option>30</option></select></div></div>
+    </div>
+    <div class="startbar">
+      <label class="hint" style="display:flex;align-items:center;gap:6px">
+        <input type="checkbox" id="punseen" checked> 优先抽取没做过的题
+      </label>
+      <span class="spacer" style="flex:1"></span>
+      <button class="btn primary" id="pstart">开始练习</button>
+    </div>
+  </div>`;
+  $('#pfy').value = Math.max(ymin, ymax-4);
+  $('#pty').value = ymax;
+  $('#pcat').value = '全部';
+  $('#pstart').onclick = ()=>startPractice({
+    yf:+$('#pfy').value, yt:+$('#pty').value, cat:$('#pcat').value,
+    num:+$('#pnum').value, unseen:$('#punseen').checked
+  });
+}
+
+function poolFor(o){
+  return Q.filter(q=>{
+    const p = P[q.p];
+    if(p.year<o.yf || p.year>o.yt) return false;
+    if(!catMatch(p,o.cat)) return false;
+    if(o.ids) return o.ids.has(q.i);
+    return true;
+  });
+}
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+function startPractice(o){
+  let pool = poolFor(o);
+  if(!pool.length){ toast('该范围内没有题目'); return; }
+  let unseenPool = o.unseen ? pool.filter(q=>!seen.has(q.i)) : [];
+  if(unseenPool.length >= Math.min(o.num, 3)) pool = unseenPool;
+  const deck = shuffle(pool.slice()).slice(0, o.num).map(q=>q.i);
+  state.practice = { deck, idx:0, res:new Array(deck.length).fill(null), t0:Date.now(), opts:o };
+  switchTab('practice');
+  renderPractice();
+}
+function renderPractice(){
+  const S = state.practice;
+  if(!S){ renderSetup(); return; }
+  const q = Q[S.deck[S.idx]-1], p = P[q.p];
+  const done = S.res.filter(x=>x).length;
+  pt.innerHTML = `
+  <div class="pr-top">
+    <button class="btn small" id="pexit">结束</button>
+    <span class="hint" id="plab">第 ${S.idx+1} / ${S.deck.length} 题</span>
+    <div class="progress"><i id="pbar" style="width:${(done/S.deck.length*100).toFixed(1)}%"></i></div>
+    ${settings.timer?'<span class="hint" id="ptime">00:00</span>':''}
+  </div>
+  <div class="card">
+    <div class="pr-card">
+      <div class="paperline"><span>${p.year} · ${esc(p.title)}</span><span>第 ${q.n} 题 · ${q.pg} 页</span></div>
+      <img id="pimg" src="img/${q.img}" alt="题目">
+    </div>
+    <div class="pr-actions">
+      <button class="btn" id="pprev" ${S.idx===0?'disabled':''}>上一题</button>
+      <button class="btn ok" id="pok">会 ✓</button>
+      <button class="btn no" id="pno">不会 ✗</button>
+      <button class="btn" id="pnext" ${S.idx>=S.deck.length-1?'disabled':''}>下一题</button>
+      <button class="btn ghost" id="ppdf">原卷</button>
+    </div>
+  </div>`;
+  $('#pexit').onclick = async ()=>{
+    const ok = await ask({title:'结束本次练习？', message:'结束本次练习后，未完成的题目不会继续；已标记为“不会”的题目仍保留在错题本。', ok:'结束练习'});
+    if(ok){ state.practice=null; renderSetup(); }
+  };
+  $('#pprev').onclick = ()=>{ if(S.idx>0){ S.idx--; renderPractice(); } };
+  $('#pnext').onclick = ()=>{ if(S.idx<S.deck.length-1){ S.idx++; renderPractice(); } };
+  $('#pok').onclick = ()=>mark(1);
+  $('#pno').onclick = ()=>mark(-1);
+  $('#ppdf').onclick = ()=>window.open(pdfHref(q),'_blank');
+  $('#pimg').onclick = ()=>openViewer(S.deck, S.idx);
+  const pim = $('#pimg');
+  if(pim){ pim.style.width = Math.min(Math.max(Math.round(q.w*1.4), 460), 1000)+'px'; }
+  seen.add(q.i);
+  saveSeen();
+  tick();
+  window.clearInterval(timer);
+  if(settings.timer) timer = setInterval(tick, 1000);
+  function mark(v){
+    S.res[S.idx] = v;
+    if(v<0){ missed.add(q.i); saveMissed(); }
+    if(S.idx < S.deck.length-1){ S.idx++; renderPractice(); }
+    else { finishPractice(); }
+  }
+}
+let timer = null;
+function tick(){
+  const S = state.practice; if(!S) return;
+  const t = Math.floor((Date.now()-S.t0)/1000);
+  const mm = String(Math.floor(t/60)).padStart(2,'0'), ss = String(t%60).padStart(2,'0');
+  const el = $('#ptime'); if(el) el.textContent = mm+':'+ss;
+}
+function finishPractice(){
+  window.clearInterval(timer);
+  const S = state.practice;
+  const bad = S.deck.filter((id,i)=>S.res[i]===-1);
+  const ok = S.deck.filter((id,i)=>S.res[i]===1);
+  const skipped = S.deck.length - bad.length - ok.length;
+  pt.innerHTML = `
+  <div class="card endbox">
+    <div class="big">${bad.length===0?'全部拿下 🎉':'练习完成'}</div>
+    <div class="stat">共 ${S.deck.length} 题 · 会 ${ok.length} 题 · 不会 ${bad.length} 题${skipped?` · 未评 ${skipped} 题`:''}</div>
+    <div class="toolbar" style="justify-content:center">
+      <button class="btn" id="eexit">返回设置</button>
+      <button class="btn" id="eagain">再来一组</button>
+      ${bad.length?'<button class="btn primary" id="eredo">重练不会的</button>':''}
+      <button class="btn" id="emissed">打开错题本</button>
+    </div>
+  </div>
+  ${bad.length?'<h3 style="margin:18px 0 8px">本次不会的题</h3><div class="card missgrid" id="badbox"></div>':''}`;
+  if(bad.length){
+    const box = $('#badbox');
+    bad.forEach(id=>{
+      let el;
+      el = missItem(Q[id-1], ()=>{ missed.delete(id); saveMissed(); el.remove(); });
+      box.appendChild(el);
+    });
+  }
+  $('#eexit').onclick = ()=>{ state.practice=null; renderSetup(); };
+  $('#eagain').onclick = ()=>{ const o=Object.assign({},S.opts,{ids:null}); startPractice(o); };
+  const redo = $('#eredo'); if(redo) redo.onclick = ()=>{ const ids=new Set(bad); startPractice(Object.assign({},S.opts,{ids, num:bad.length})); };
+  $('#emissed').onclick = ()=>switchTab('missed');
+}
+function missItem(q, onRemove){
+  const p = P[q.p];
+  const d = document.createElement('div');
+  d.className = 'qitem';
+  d.innerHTML = `<div class="lab"><span>${p.year} · 第 ${q.n} 题</span><button class="btn small">移除</button></div>
+    <div class="thumbwrap"><img class="thumb" loading="lazy" src="img/${q.img}" alt=""></div>`;
+  d.querySelector('.thumbwrap').onclick = ()=>openViewer([q.i],0);
+  d.querySelector('button').onclick = e=>{ e.stopPropagation(); onRemove(); };
+  return d;
+}
+
+/* ---------- missed ---------- */
+function renderMissed(){
+  const box = $('#tab-missed');
+  const ids = [...missed].map(i=>Q[i-1]).filter(Boolean).sort((a,b)=>b.p-a.p);
+  box.innerHTML = `<div class="toolbar">
+      <h2 style="margin:0;font-size:18px">错题本 <span class="hint">${ids.length} 题</span></h2>
+      <span style="flex:1"></span>
+      ${ids.length?'<button class="btn primary" id="mredo">重练错题</button><button class="btn" id="mclear">清空</button>':''}
+    </div>
+    <div class="card missgrid" id="mbox"></div>
+    ${ids.length?'':'<div class="empty">还没有错题。练习时点“不会 ✗”就会收进这里。</div>'}`;
+  const mbox = $('#mbox');
+  ids.forEach(q=>{
+    const item = missItem(q, ()=>{ missed.delete(q.i); saveMissed(); item.remove(); renderMissed(); });
+    mbox.appendChild(item);
+  });
+  const redo = $('#mredo');
+  if(redo) redo.onclick = ()=>startPractice({yf:ymin,yt:ymax,cat:'全部',num:ids.length,ids:new Set(ids.map(q=>q.i)),unseen:false});
+  const clr = $('#mclear');
+  if(clr) clr.onclick = async ()=>{
+    const ok = await ask({title:'清空错题本？', message:`将删除 ${ids.length} 道错题记录，练习记录不受影响。此操作不可撤销。`, ok:'清空错题本', danger:true});
+    if(ok){ missed.clear(); saveMissed(); renderMissed(); toast('错题本已清空'); }
+  };
+}
+
+/* ---------- settings ---------- */
+function renderSettings(){
+  const box = $('#tab-settings');
+  const seg = (id, opts, cur) => '<div class="seg" id="'+id+'">' +
+    opts.map(([k,label])=>`<button data-v="${k}" class="${String(cur)===String(k)?'on':''}">${label}</button>`).join('') + '</div>';
+  const themes = [['auto','跟随系统'],['light','浅色'],['dark','深色']];
+  const sizes = [['0.9','小'],['1','标准'],['1.12','大'],['1.25','特大']];
+  const fonts = [['system','系统默认'],['hei','黑体'],['song','宋体']];
+  box.innerHTML = `
+  <div class="card" style="max-width:860px;margin:0 auto 16px">
+    <div style="padding:16px 18px 4px">
+      <h2 style="margin:0;font-size:calc(18px * var(--fs))">设置</h2>
+      <div class="hint">修改后立即生效，保存在本机浏览器。</div>
+    </div>
+    <div class="setrow"><span class="slab">主题</span>${seg('seg-theme', themes, settings.theme)}</div>
+    <div class="setrow"><span class="slab">黑白模式</span>
+      <label class="hint" style="display:flex;align-items:center;gap:8px">
+        <input type="checkbox" id="set-bw" ${settings.bw?'checked':''}> 界面与题目转为灰度
+      </label>
+    </div>
+    <div class="setrow"><span class="slab">字号</span>${seg('seg-fs', sizes, settings.fs)}
+      <span class="fs-preview" style="margin-left:auto">函数 f(x) 在区间 (0, +∞) 上单调递增</span>
+    </div>
+    <div class="setrow"><span class="slab">界面字体</span>${seg('seg-font', fonts, settings.font)}</div>
+    <div class="setrow"><span class="slab">练习计时</span>
+      <label class="hint" style="display:flex;align-items:center;gap:8px">
+        <input type="checkbox" id="set-timer" ${settings.timer?'checked':''}> 练习时显示计时器
+      </label>
+    </div>
+    <div class="setrow"><span class="slab">恢复</span>
+      <button class="btn small" id="set-defaults">恢复默认外观设置</button>
+      <span class="sval">不会影响练习记录和错题本</span>
+    </div>
+  </div>
+  <div class="card" style="max-width:860px;margin:0 auto">
+    <div style="padding:16px 18px 4px">
+      <h2 style="margin:0;font-size:calc(18px * var(--fs))">数据</h2>
+      <div class="hint">已练习 ${seen.size} / ${Q.length} 题 · 错题 ${missed.size} 题</div>
+    </div>
+    <div class="setrow">
+      <button class="btn" id="set-clear-seen">清空练习记录</button>
+      <button class="btn" id="set-clear-missed">清空错题本</button>
+      <button class="btn danger" id="set-reset">清空全部数据</button>
+      <span class="sval" style="margin-left:auto">${P.length} 套 · ${Q.length} 题</span>
+    </div>
+    <div class="setrow" style="border-bottom:0">
+      <span class="hint">题目由原卷 PDF 自动切分排版，1977–2026 共 643 套；2026 年 5 套为后期重排并入，题库不含答案。</span>
+    </div>
+  </div>`;
+
+  const bindSeg = (id, key) => {
+    const el = $('#'+id);
+    if(!el) return;
+    el.onclick = e => {
+      const b = e.target.closest('button');
+      if(!b) return;
+      settings[key] = key==='fs' ? parseFloat(b.dataset.v) : b.dataset.v;
+      saveSettings(); applySettings(); renderSettings();
+    };
+  };
+  bindSeg('seg-theme','theme');
+  bindSeg('seg-fs','fs');
+  bindSeg('seg-font','font');
+
+  $('#set-bw').onchange = e => { settings.bw = e.target.checked; saveSettings(); applySettings(); };
+  $('#set-timer').onchange = e => { settings.timer = e.target.checked; saveSettings(); };
+  $('#set-defaults').onclick = () => {
+    settings = Object.assign({}, DEF_SET);
+    saveSettings(); applySettings(); renderSettings();
+    toast('已恢复默认外观设置');
+  };
+
+  $('#set-clear-seen').onclick = async () => {
+    if(!seen.size){ toast('暂无练习记录'); return; }
+    const ok = await ask({title:'清空练习记录？', message:`将清空已练习的 ${seen.size} 题记录，错题本不受影响。此操作不可撤销。`, ok:'清空记录', danger:true});
+    if(ok){ seen.clear(); saveSeen(); renderSettings(); toast('练习记录已清空'); }
+  };
+  $('#set-clear-missed').onclick = async () => {
+    if(!missed.size){ toast('错题本已经是空的'); return; }
+    const ok = await ask({title:'清空错题本？', message:`将删除 ${missed.size} 道错题，练习记录不受影响。此操作不可撤销。`, ok:'清空错题本', danger:true});
+    if(ok){ missed.clear(); saveMissed(); renderSettings(); toast('错题本已清空'); }
+  };
+  $('#set-reset').onclick = async () => {
+    const ok = await ask({title:'清空全部本地数据？', message:'练习记录、错题本和个性化设置都会被删除，此操作不可撤销。', ok:'全部清空', danger:true});
+    if(ok){
+      [MISS_KEY, SEEN_KEY, SET_KEY].forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} });
+      missed = new Set(); seen = new Set();
+      settings = Object.assign({}, DEF_SET);
+      state.practice = null;
+      applySettings(); renderSettings();
+      toast('已清空全部数据');
+    }
+  };
+}
+
+let toastTimer = null;
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('on'), 1800);
+}
+
+/* ---------- confirm dialog ---------- */
+const modal = $('#modal');
+let modalResolve = null, modalFocus = null;
+function ask(opt){
+  return new Promise(resolve=>{
+    modalResolve = resolve;
+    modalFocus = document.activeElement;
+    $('#mtitle').textContent = opt.title || '请确认';
+    $('#mmsg').textContent = opt.message || '';
+    const ok = $('#mok');
+    ok.textContent = opt.ok || '确定';
+    ok.className = 'btn ' + (opt.danger ? 'danger solid' : 'primary');
+    modal.classList.add('on');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(()=>{ const c = $('#mcancel'); if(c) c.focus(); }, 30);
+  });
+}
+function closeAsk(val){
+  if(!modal.classList.contains('on')) return;
+  modal.classList.remove('on');
+  modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+  try{ if(modalFocus && modalFocus.focus) modalFocus.focus(); }catch(e){}
+  if(modalResolve){ const r = modalResolve; modalResolve = null; r(val); }
+}
+$('#mcancel').onclick = ()=>closeAsk(false);
+$('#mok').onclick = ()=>closeAsk(true);
+modal.addEventListener('click', e=>{
+  if(e.target === modal || e.target.classList.contains('mask')) closeAsk(false);
+});
+document.addEventListener('keydown', e=>{
+  if(modal.classList.contains('on') && e.key === 'Escape'){ e.preventDefault(); closeAsk(false); }
+});
+})();
+</script>
+</body>
+</html>

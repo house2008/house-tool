@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="法律文献库 · 按法律类型与时间整理的全部法律版本，原始 DOCX 文件保持不动。">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<title>法律文献库 · 国家法律索引</title>
+<link rel="stylesheet" href="assets/library.css?v=20261105d">
+</head>
+<body>
+<header class="lib-hero">
+  <div class="wrap">
+    <a class="lib-back" href="index.html">← 返回法律索引</a>
+    <p class="lib-kicker">中国特色社会主义法治体系 · 法律文献库</p>
+    <h1>法律文献库</h1>
+    <p class="lib-sub">按法律类型与公布时间整理 · 原始 DOCX 文件保存在 laws/zip，未作改动</p>
+    <div class="lib-stats">
+      <div class="lib-stat"><strong id="statTotal">0</strong><span>文件总数</span></div>
+      <div class="lib-stat"><strong id="statTitles">0</strong><span>法律 / 文献</span></div>
+      <div class="lib-stat"><strong id="statCurrent">0</strong><span>现行版本</span></div>
+      <div class="lib-stat"><strong id="statHistory">0</strong><span>历史版本</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap lib-main">
+  <div class="lib-toolbar">
+    <div class="lib-search-row">
+      <svg class="lib-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m20 20-3.5-3.5"></path>
+      </svg>
+      <input id="libSearch" type="search" autocomplete="off" spellcheck="false" placeholder="搜索标题或正文，例如：民法典 / 善意取得 / 合同法" aria-label="搜索标题或正文">
+      <span class="lib-key-hint" aria-hidden="true">/</span>
+      <button class="lib-clear" id="libClear" type="button" hidden>清除</button>
+      <button class="lib-panel-toggle" id="libPanelToggle" type="button" aria-expanded="true" aria-controls="libSearchPanel" aria-label="显示或隐藏筛选" title="显示或隐藏筛选">
+        <span class="lib-panel-text">收起</span>
+        <span class="lib-panel-chevron" aria-hidden="true">⌃</span>
+      </button>
+    </div>
+
+    <div class="lib-search-panel" id="libSearchPanel">
+      <div class="lib-controls">
+        <div class="lib-control-group" role="group" aria-label="搜索范围">
+          <span class="lib-control-label">范围</span>
+          <button class="lib-seg active" type="button" data-lib-scope="all" aria-pressed="true">标题+正文</button>
+          <button class="lib-seg" type="button" data-lib-scope="title" aria-pressed="false">标题</button>
+          <button class="lib-seg" type="button" data-lib-scope="body" aria-pressed="false">正文</button>
+        </div>
+        <div class="lib-control-group" role="group" aria-label="搜索模式">
+          <span class="lib-control-label">模式</span>
+          <button class="lib-seg active" type="button" data-lib-mode="fuzzy" aria-pressed="true">模糊</button>
+          <button class="lib-seg" type="button" data-lib-mode="exact" aria-pressed="false">精确</button>
+        </div>
+        <label class="lib-control-group" for="libYear">
+          <span class="lib-control-label">年份</span>
+          <select class="lib-year-select" id="libYear" aria-label="按年份筛选"></select>
+        </label>
+        <span class="lib-count" id="libCount">共 0 份</span>
+        <span class="lib-search-status" id="libSearchStatus" hidden></span>
+      </div>
+      <div class="lib-chips" id="libChips" role="group" aria-label="按法律类型筛选"></div>
+    </div>
+  </div>
+
+  <div id="libList"></div>
+
+  <div class="lib-empty" id="libEmpty" hidden>
+    <h3>未找到相关文献</h3>
+    <p>请尝试更换关键词，或选择“全部”类型与年份。</p>
+  </div>
+</main>
+
+<footer class="lib-footer">
+  <div class="wrap">
+    <div><b>国家法律索引 · 法律文献库</b><p>按类型与时间整理，保留全部版本</p></div>
+    <div class="right"><p>原始文件目录：laws\zip（未改动）</p><p>整理日期：2026年11月5日</p><p><a href="使用说明.txt" target="_blank" style="color:var(--gold-200);text-decoration:underline">使用说明</a></p></div>
+  </div>
+</footer>
+
+<script src="data/library.js?v=20261105"></script>
+<script src="assets/library-app.js?v=20261105c"></script>
+</body>
+</html>

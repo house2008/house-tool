@@ -1,0 +1,2 @@
+﻿papers=643 questions=13833
+2026: 5 papers merged, 2-column A3 layout (pages 1219-1229); original pages 1-1218 unchanged.
